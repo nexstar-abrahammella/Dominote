@@ -3,6 +3,7 @@ import 'package:domiote/components/TeamPointsBoard.dart';
 import '../utilities/styles.dart';
 import '../utilities/constants.dart';
 
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
