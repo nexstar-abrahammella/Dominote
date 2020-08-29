@@ -7,9 +7,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarHeader(),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[TeamPointsBoard(), TeamPointsBoard()],
+      body: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              TeamPointsBoard(),
+              TeamPointsBoard(),
+            ],
+          )
+        ],
       ),
     );
   }
