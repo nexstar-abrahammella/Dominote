@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:domiote/utilities/styles.dart';
 
 class TeamPointsBoard extends StatefulWidget {
   @override
@@ -6,6 +7,8 @@ class TeamPointsBoard extends StatefulWidget {
 }
 
 class _TeamPointsBoardState extends State<TeamPointsBoard> {
+  final String teamNumber = "1";
+  final String teamName = "Los tigers";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,10 +19,28 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               CircleAvatar(
-                child: Text("1"),
-                radius: 8,
+                backgroundColor: blue300,
+                child: Text(
+                  teamNumber,
+                  style: TextStyle(
+                      fontSize: 11,
+                      color: whiteColor,
+                      fontFamily: 'Monserrat',
+                      fontWeight: FontWeight.bold),
+                ),
+                radius: 10,
               ),
-              Text(" Equipo A")
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                teamName,
+                style: TextStyle(
+                    fontFamily: 'Monserrat',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                    fontSize: 18),
+              )
             ],
           ),
           SizedBox(
