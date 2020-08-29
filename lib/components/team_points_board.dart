@@ -15,34 +15,7 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: blue300,
-                child: Text(
-                  teamNumber,
-                  style: TextStyle(
-                      fontSize: 11,
-                      color: whiteColor,
-                      fontFamily: 'Monserrat',
-                      fontWeight: FontWeight.bold),
-                ),
-                radius: 10,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                teamName,
-                style: TextStyle(
-                    fontFamily: 'Monserrat',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                    fontSize: 18),
-              )
-            ],
-          ),
+          TeamInfo(teamNumber: teamNumber, teamName: teamName),
           SizedBox(
             height: 8,
           ),
@@ -104,6 +77,49 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
           )
         ],
       ),
+    );
+  }
+}
+
+class TeamInfo extends StatelessWidget {
+  const TeamInfo({
+    Key key,
+    @required this.teamNumber,
+    @required this.teamName,
+  }) : super(key: key);
+
+  final String teamNumber;
+  final String teamName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        CircleAvatar(
+          backgroundColor: blue300,
+          child: Text(
+            teamNumber,
+            style: TextStyle(
+                fontSize: 11,
+                color: whiteColor,
+                fontFamily: 'Monserrat',
+                fontWeight: FontWeight.bold),
+          ),
+          radius: 10,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          teamName,
+          style: TextStyle(
+              fontFamily: 'Monserrat',
+              fontWeight: FontWeight.bold,
+              color: Colors.black54,
+              fontSize: 18),
+        )
+      ],
     );
   }
 }
