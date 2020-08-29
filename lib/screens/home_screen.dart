@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:domiote/components/TeamPointsBoard.dart';
+import 'package:domiote/components/team_points_board.dart';
 import 'package:domiote/components/headers_components.dart';
 
 class HomeScreen extends StatelessWidget {
