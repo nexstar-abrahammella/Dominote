@@ -9,6 +9,8 @@ class TeamPointsBoard extends StatefulWidget {
 class _TeamPointsBoardState extends State<TeamPointsBoard> {
   final String teamNumber = "1";
   final String teamName = "Los tigers";
+  final int teamPoints = 100;
+  final double pointCircleRadius = 9;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,35 +25,10 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
             height: 50,
             padding: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
-                color: Colors.black54,
+                color: Colors.black,
                 borderRadius: BorderRadius.all(Radius.circular(8))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 10,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                CircleAvatar(
-                  radius: 10,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                CircleAvatar(
-                  radius: 10,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "200",
-                  style: TextStyle(fontSize: 25),
-                ),
-              ],
-            ),
+            child: TeamPointsIndicator(
+                pointCircleRadius: pointCircleRadius, teamPoints: teamPoints),
           ),
           Container(
             padding: EdgeInsets.only(top: 5),
@@ -77,6 +54,56 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
           )
         ],
       ),
+    );
+  }
+}
+
+class TeamPointsIndicator extends StatelessWidget {
+  const TeamPointsIndicator({
+    Key key,
+    @required this.pointCircleRadius,
+    @required this.teamPoints,
+  }) : super(key: key);
+
+  final double pointCircleRadius;
+  final int teamPoints;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        CircleAvatar(
+          backgroundColor: blue300,
+          radius: pointCircleRadius,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        CircleAvatar(
+          backgroundColor: blue300,
+          radius: pointCircleRadius,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        CircleAvatar(
+          backgroundColor: blue300,
+          radius: pointCircleRadius,
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          teamPoints.toString(),
+          style: TextStyle(
+            fontSize: 30,
+            color: blue300,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Monserrat',
+          ),
+        ),
+      ],
     );
   }
 }
