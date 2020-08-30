@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
               TeamPointsBoard(),
               TeamPointsBoard(),
             ],
-          )
+          ),
         ],
       ),
     );

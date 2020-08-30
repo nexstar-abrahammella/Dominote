@@ -30,28 +30,7 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
             child: TeamPointsIndicator(
                 pointCircleRadius: pointCircleRadius, teamPoints: teamPoints),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 5),
-            child: Row(
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 15,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                CircleAvatar(
-                  radius: 15,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                CircleAvatar(
-                  radius: 15,
-                ),
-              ],
-            ),
-          )
+          FastPointsActions()
         ],
       ),
     );
@@ -147,6 +126,43 @@ class TeamInfo extends StatelessWidget {
               fontSize: 18),
         )
       ],
+    );
+  }
+}
+
+class FastPointsActions extends StatefulWidget {
+  @override
+  _FastPointsActionsState createState() => _FastPointsActionsState();
+}
+
+class _FastPointsActionsState extends State<FastPointsActions> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 5),
+      width: 155,
+      height: 37,
+      child: ListView.builder(
+        itemCount: 3,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: ClipOval(
+              child: Material(
+                color: blue300, // button color
+                child: InkWell(
+                  child: SizedBox(
+                    width: 32,
+                    height: 32,
+                  ),
+                  onTap: () {},
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
