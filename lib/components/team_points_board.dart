@@ -23,7 +23,7 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
           ),
           Container(
             height: 50,
-            padding: EdgeInsets.only(left: 5, right: 5),
+            padding: EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
                 color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -114,7 +114,7 @@ class TeamPointsIndicator extends StatelessWidget {
           radius: pointCircleRadius,
         ),
         SizedBox(
-          width: 10,
+          width: 15,
         ),
         Text(
           teamPoints.toString(),
@@ -140,28 +140,51 @@ class _FastPointsActionsState extends State<FastPointsActions> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 10),
-      width: 155,
-      height: 42,
-      child: ListView.builder(
-        itemCount: 3,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: ClipOval(
-              child: Material(
-                color: blue300, // button color
-                child: InkWell(
-                  child: SizedBox(
-                    width: 32,
-                    height: 32,
-                  ),
-                  onTap: () {},
+      child: Row(
+        children: <Widget>[
+          ClipOval(
+            child: Material(
+              color: blue300, // button color
+              child: InkWell(
+                child: SizedBox(
+                  width: 32,
+                  height: 32,
                 ),
+                onTap: () {},
               ),
             ),
-          );
-        },
+          ),
+          SizedBox(
+            width: 25,
+          ),
+          ClipOval(
+            child: Material(
+              color: blue300, // button color
+              child: InkWell(
+                child: SizedBox(
+                  width: 32,
+                  height: 32,
+                ),
+                onTap: () {},
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 25,
+          ),
+          ClipOval(
+            child: Material(
+              color: blue300, // button color
+              child: InkWell(
+                child: SizedBox(
+                  width: 32,
+                  height: 32,
+                ),
+                onTap: () {},
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
