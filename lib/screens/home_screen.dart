@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:domiote/components/TeamPointsBoard.dart';
+import 'package:domiote/components/team_points_board.dart';
 import '../utilities/styles.dart';
 import '../utilities/constants.dart';
-
 
 class HomeScreen extends StatelessWidget {
   @override

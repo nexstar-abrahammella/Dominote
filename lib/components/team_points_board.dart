@@ -25,7 +25,7 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
             height: 50,
             padding: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
-                color: Colors.black,
+                color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             child: TeamPointsIndicator(
                 pointCircleRadius: pointCircleRadius, teamPoints: teamPoints),
@@ -33,6 +33,49 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
           FastPointsActions()
         ],
       ),
+    );
+  }
+}
+
+class TeamInfo extends StatelessWidget {
+  const TeamInfo({
+    Key key,
+    @required this.teamNumber,
+    @required this.teamName,
+  }) : super(key: key);
+
+  final String teamNumber;
+  final String teamName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        CircleAvatar(
+          backgroundColor: blue300,
+          child: Text(
+            teamNumber,
+            style: TextStyle(
+                fontSize: 11,
+                color: whiteColor,
+                fontFamily: 'Monserrat',
+                fontWeight: FontWeight.bold),
+          ),
+          radius: 10,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          teamName,
+          style: TextStyle(
+              fontFamily: 'Monserrat',
+              fontWeight: FontWeight.bold,
+              color: whiteColor,
+              fontSize: 18),
+        )
+      ],
     );
   }
 }
@@ -87,49 +130,6 @@ class TeamPointsIndicator extends StatelessWidget {
   }
 }
 
-class TeamInfo extends StatelessWidget {
-  const TeamInfo({
-    Key key,
-    @required this.teamNumber,
-    @required this.teamName,
-  }) : super(key: key);
-
-  final String teamNumber;
-  final String teamName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        CircleAvatar(
-          backgroundColor: blue300,
-          child: Text(
-            teamNumber,
-            style: TextStyle(
-                fontSize: 11,
-                color: whiteColor,
-                fontFamily: 'Monserrat',
-                fontWeight: FontWeight.bold),
-          ),
-          radius: 10,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        Text(
-          teamName,
-          style: TextStyle(
-              fontFamily: 'Monserrat',
-              fontWeight: FontWeight.bold,
-              color: Colors.black54,
-              fontSize: 18),
-        )
-      ],
-    );
-  }
-}
-
 class FastPointsActions extends StatefulWidget {
   @override
   _FastPointsActionsState createState() => _FastPointsActionsState();
@@ -139,9 +139,9 @@ class _FastPointsActionsState extends State<FastPointsActions> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 5),
+      padding: EdgeInsets.only(top: 10),
       width: 155,
-      height: 37,
+      height: 42,
       child: ListView.builder(
         itemCount: 3,
         scrollDirection: Axis.horizontal,
