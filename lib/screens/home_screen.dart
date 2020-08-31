@@ -16,158 +16,166 @@ class HomeScreen extends StatelessWidget {
         title: Text(headerTitle, style: headerTextStyle),
         backgroundColor: blue700,
       ),
-      body: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(5.0),
-                  decoration: gameInformationBorderDecoration,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          GameHeaderInformation(
-                            textLabel: seriesTitle,
-                            numberLabel: seriesNumber,
-                          ),
-                          GameHeaderInformation(
-                            textLabel: pointTitle,
-                            numberLabel: numberGamePoints,
-                          ),
-                        ],
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    decoration: gameInformationBorderDecoration,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            GameHeaderInformation(
+                              textLabel: seriesTitle,
+                              numberLabel: seriesNumber,
+                            ),
+                            GameHeaderInformation(
+                              textLabel: pointTitle,
+                              numberLabel: numberGamePoints,
+                            ),
+                          ],
+                        ),
+                        RawMaterialButton(
+                          onPressed: () {},
+                          elevation: 2.0,
+                          fillColor: blue300,
+                          padding: EdgeInsets.all(15.0),
+                          shape: CircleBorder(),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                TeamPointsBoard(),
+                TeamPointsBoard(),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RawMaterialButton(
+                  child: Text(
+                    'Guardar',
+                    style: saveButtonTextStyle,
+                  ),
+                  onPressed: () {},
+                  elevation: 2.0,
+                  fillColor: whiteColor,
+                  padding: EdgeInsets.all(10.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 36,
+                    width: 380,
+                    decoration: BoxDecoration(
+                      color: blue200,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.0),
+                        topRight: Radius.circular(8.0),
                       ),
-                      RawMaterialButton(
-                        onPressed: () {},
-                        elevation: 2.0,
-                        fillColor: blue300,
-                        padding: EdgeInsets.all(15.0),
-                        shape: CircleBorder(),
-                      )
-                    ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          'Equipo A',
+                          style: teamsLabelStyle,
+                        ),
+                        Text(
+                          'Equipo B',
+                          style: teamsLabelStyle,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              TeamPointsBoard(),
-              TeamPointsBoard(),
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              RawMaterialButton(
-                child: Text(
-                  'Guardar',
-                  style: saveButtonTextStyle,
-                ),
-                onPressed: () {},
-                elevation: 2.0,
-                fillColor: whiteColor,
-                padding: EdgeInsets.all(10.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Column(
-            children: <Widget>[
-              Container(
-                height: 36,
-                width: 380,
-                decoration: BoxDecoration(
-                  color: blue200,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0),
+                  Expanded(
+                    child: Container(
+                      width: 380,
+                      color: whiteColor,
+                    ),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text(
-                      'Equipo A',
-                      style: teamsLabelStyle,
+                  Container(
+                    height: 36,
+                    width: 380,
+                    color: blue200,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          '99',
+                          style: teamsLabelStyle,
+                        ),
+                        Text(
+                          'Puntos',
+                          style: teamsLabelStyle,
+                        ),
+                        Text(
+                          '75',
+                          style: teamsLabelStyle,
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Equipo B',
-                      style: teamsLabelStyle,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: 350,
-                width: 380,
-                color: whiteColor,
-              ),
-              Container(
-                height: 36,
-                width: 380,
-                color: blue200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text(
-                      '99',
-                      style: teamsLabelStyle,
-                    ),
-                    Text(
-                      'Puntos',
-                      style: teamsLabelStyle,
-                    ),
-                    Text(
-                      '75',
-                      style: teamsLabelStyle,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: 36,
-                width: 380,
-                decoration: BoxDecoration(
-                  color: blue900,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text(
-                      '101',
-                      style: teamsLabelStyleWhite,
+                  Container(
+                    height: 36,
+                    width: 380,
+                    decoration: BoxDecoration(
+                      color: blue900,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(8.0),
+                        bottomRight: Radius.circular(8.0),
+                      ),
                     ),
-                    Text(
-                      'Restantes',
-                      style: teamsLabelStyleWhite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          '101',
+                          style: teamsLabelStyleWhite,
+                        ),
+                        Text(
+                          'Restantes',
+                          style: teamsLabelStyleWhite,
+                        ),
+                        Text(
+                          '125',
+                          style: teamsLabelStyleWhite,
+                        ),
+                      ],
                     ),
-                    Text(
-                      '125',
-                      style: teamsLabelStyleWhite,
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
+                ],
               ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
