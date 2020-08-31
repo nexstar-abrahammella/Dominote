@@ -20,9 +20,28 @@ const gameInformationLabelStyle = TextStyle(
   fontSize: 16.0,
 );
 
+const teamsLabelStyle = TextStyle(
+  fontFamily: 'Monserrat',
+  color: blue900,
+  fontSize: 18.0,
+);
+
+const teamsLabelStyleWhite = TextStyle(
+  fontFamily: 'Monserrat',
+  color: blue200,
+  fontSize: 18.0,
+);
+
 const gameInformationBorderDecoration = BoxDecoration(
   border: Border(
     top: BorderSide(width: 0.3, color: whiteColor),
     bottom: BorderSide(width: 0.3, color: whiteColor),
   ),
+);
+
+const saveButtonTextStyle = TextStyle(
+  fontFamily: 'Monserrat',
+  color: blue300,
+  fontSize: 20.0,
+  fontWeight: FontWeight.w800,
 );
