@@ -4,6 +4,7 @@ import '../utilities/constants.dart';
 import 'package:domiote/components/team_points_board.dart';
 import 'package:domiote/components/game_information.dart';
 import '../utilities/internationalization_constants.dart';
+import 'package:domiote/components/PointsTableRow.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -85,97 +86,113 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 36,
-                    width: 380,
-                    decoration: BoxDecoration(
-                      color: blue200,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8.0),
-                        topRight: Radius.circular(8.0),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text(
-                          'Equipo A',
-                          style: teamsLabelStyle,
-                        ),
-                        Text(
-                          'Equipo B',
-                          style: teamsLabelStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: 380,
-                      color: whiteColor,
-                    ),
-                  ),
-                  Container(
-                    height: 36,
-                    width: 380,
-                    color: blue200,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text(
-                          '99',
-                          style: teamsLabelStyle,
-                        ),
-                        Text(
-                          'Puntos',
-                          style: teamsLabelStyle,
-                        ),
-                        Text(
-                          '75',
-                          style: teamsLabelStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 36,
-                    width: 380,
-                    decoration: BoxDecoration(
-                      color: blue900,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(8.0),
-                        bottomRight: Radius.circular(8.0),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text(
-                          '101',
-                          style: teamsLabelStyleWhite,
-                        ),
-                        Text(
-                          'Restantes',
-                          style: teamsLabelStyleWhite,
-                        ),
-                        Text(
-                          '125',
-                          style: teamsLabelStyleWhite,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  )
-                ],
-              ),
-            )
+            PointsTable()
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PointsTable extends StatelessWidget {
+  const PointsTable({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 36,
+            width: 380,
+            decoration: BoxDecoration(
+              color: blue200,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8.0),
+                topRight: Radius.circular(8.0),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Text(
+                  'Equipo A',
+                  style: teamsLabelStyle,
+                ),
+                Text(
+                  'Equipo B',
+                  style: teamsLabelStyle,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              width: 380,
+              color: whiteColor,
+              child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return PointsTableRow();
+                  }),
+            ),
+          ),
+          Container(
+            height: 36,
+            width: 380,
+            color: blue200,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Text(
+                  '99',
+                  style: teamsLabelStyle,
+                ),
+                Text(
+                  'Puntos',
+                  style: teamsLabelStyle,
+                ),
+                Text(
+                  '75',
+                  style: teamsLabelStyle,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 36,
+            width: 380,
+            decoration: BoxDecoration(
+              color: blue900,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(8.0),
+                bottomRight: Radius.circular(8.0),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Text(
+                  '101',
+                  style: teamsLabelStyleWhite,
+                ),
+                Text(
+                  'Restantes',
+                  style: teamsLabelStyleWhite,
+                ),
+                Text(
+                  '125',
+                  style: teamsLabelStyleWhite,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          )
+        ],
       ),
     );
   }
