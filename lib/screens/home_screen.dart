@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../utilities/styles.dart';
 import '../utilities/constants.dart';
-import 'package:domiote/components/team_points_board.dart';
-import 'package:domiote/components/game_information.dart';
+import 'package:dominote/components/team_points_board.dart';
+import 'package:dominote/components/game_information.dart';
 import '../utilities/internationalization_constants.dart';
-import 'package:domiote/components/points_table_row.dart';
+import 'package:dominote/components/points_table_row.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -135,7 +135,7 @@ class PointsTable extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: 4,
                     itemBuilder: (context, index) {
-                      return PointsTableRow();
+                      return PointsTableRow(points:{'teamA':50,'teamB':60},fastPlay: {'teamA':1,'teamB':1},);
                     }),
               ),
             ),
@@ -150,7 +150,7 @@ class PointsTable extends StatelessWidget {
                     style: teamsLabelStyle,
                   ),
                   Text(
-                    'Puntos',
+                    pointsTitle,
                     style: teamsLabelStyle,
                   ),
                   Text(
@@ -177,7 +177,7 @@ class PointsTable extends StatelessWidget {
                     style: teamsLabelStyleWhite,
                   ),
                   Text(
-                    'Restantes',
+                    pointsToWinTitle,
                     style: teamsLabelStyleWhite,
                   ),
                   Text(

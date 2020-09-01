@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:domiote/utilities/styles.dart';
+import 'package:dominote/utilities/styles.dart';
 
 class TeamPointsBoard extends StatefulWidget {
   @override
