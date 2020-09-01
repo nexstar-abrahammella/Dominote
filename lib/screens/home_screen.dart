@@ -4,7 +4,7 @@ import '../utilities/constants.dart';
 import 'package:domiote/components/team_points_board.dart';
 import 'package:domiote/components/game_information.dart';
 import '../utilities/internationalization_constants.dart';
-import 'package:domiote/components/PointsTableRow.dart';
+import 'package:domiote/components/points_table_row.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
