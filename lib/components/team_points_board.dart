@@ -56,11 +56,7 @@ class TeamInfo extends StatelessWidget {
           backgroundColor: blue300,
           child: Text(
             teamNumber,
-            style: TextStyle(
-                fontSize: 11,
-                color: whiteColor,
-                fontFamily: 'Monserrat',
-                fontWeight: FontWeight.bold),
+            style: teamNumberTextStyle,
           ),
           radius: 10,
         ),
@@ -69,11 +65,7 @@ class TeamInfo extends StatelessWidget {
         ),
         Text(
           teamName,
-          style: TextStyle(
-              fontFamily: 'Monserrat',
-              fontWeight: FontWeight.bold,
-              color: whiteColor,
-              fontSize: 18),
+          style: teamNameTextStyle,
         )
       ],
     );
@@ -118,12 +110,7 @@ class TeamPointsIndicator extends StatelessWidget {
         ),
         Text(
           teamPoints.toString(),
-          style: TextStyle(
-            fontSize: 30,
-            color: blue300,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Monserrat',
-          ),
+          style: teamPointsInput,
         ),
       ],
     );

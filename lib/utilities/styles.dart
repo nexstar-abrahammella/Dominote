@@ -45,3 +45,22 @@ const saveButtonTextStyle = TextStyle(
   fontSize: 20.0,
   fontWeight: FontWeight.w800,
 );
+
+const TextStyle teamNumberTextStyle = TextStyle(
+    fontSize: 11,
+    color: whiteColor,
+    fontFamily: 'Monserrat',
+    fontWeight: FontWeight.bold);
+
+const TextStyle teamNameTextStyle = TextStyle(
+    fontFamily: 'Monserrat',
+    fontWeight: FontWeight.bold,
+    color: whiteColor,
+    fontSize: 18);
+
+const teamPointsInput = TextStyle(
+  fontSize: 30,
+  color: blue300,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
