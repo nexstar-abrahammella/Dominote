@@ -11,10 +11,83 @@ import '../utilities/styles.dart';
 
 int totalTeamAPoint = 0;
 int totalTeamBPoint = 0;
+int totalScore = 200;
+int restantTeamAPoint = totalScore;
+int restantTeamBPoint = totalScore;
+bool isTeamAWinner = false;
+bool isTeamBWinner = false;
 
 String locale = "es";
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  showAlertDialog(BuildContext context, String textMessage) {
+    // set up the button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("My title"),
+      content: Text("$textMessage"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  void saveButton() {
+    setState(() {
+      totalTeamAPoint += int.parse(teamAGamePoints);
+      totalTeamBPoint += int.parse(teamBGamePoints);
+      updateTotalScoreWinner();
+      teamAGamePoints = '0';
+      teamBGamePoints = '0';
+      textEditingcontroller.clear();
+
+      print('Team A Has: $totalTeamAPoint | Team B Has: $totalTeamBPoint');
+    });
+  }
+
+  void updateTotalScoreWinner() {
+    setState(() {
+      if (totalTeamAPoint < totalScore || restantTeamBPoint < totalScore) {
+        restantTeamAPoint = totalScore - totalTeamAPoint;
+        restantTeamBPoint = totalScore - totalTeamBPoint;
+      }
+      if (totalTeamAPoint >= totalScore) {
+        resetGame();
+        showAlertDialog(context, 'El equipo A Gano.');
+      }
+      if (totalTeamBPoint >= totalScore) {
+        resetGame();
+        showAlertDialog(context, 'El equipo B Gano.');
+      }
+    });
+  }
+
+  void resetGame() {
+    totalTeamAPoint = 0;
+    totalTeamBPoint = 0;
+    totalScore = 200;
+    restantTeamAPoint = totalScore;
+    restantTeamBPoint = totalScore;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -104,11 +177,7 @@ class HomeScreen extends StatelessWidget {
                         style: saveButtonTextStyle,
                       ),
                       onPressed: () {
-                        totalTeamAPoint += int.parse(teamAGamePoints);
-                        totalTeamBPoint += int.parse(teamBGamePoints);
-
-                        print(
-                            'Team A Has: $totalTeamAPoint | Team B Has: $totalTeamBPoint');
+                        saveButton();
                       },
                       elevation: 2.0,
                       shape: RoundedRectangleBorder(
@@ -169,7 +238,7 @@ class PointsTable extends StatelessWidget {
               child: Container(
                 color: whiteColor,
                 child: ListView.builder(
-                    itemCount: 7,
+                    itemCount: 1,
                     itemBuilder: (context, index) {
                       return PointsTableRow(
                         points: {'teamA': 50, 'teamB': 60},
@@ -212,7 +281,7 @@ class PointsTable extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text(
-                    '101',
+                    '$restantTeamAPoint',
                     style: teamsLabelStyleWhite,
                   ),
                   Text(
@@ -220,7 +289,7 @@ class PointsTable extends StatelessWidget {
                     style: teamsLabelStyleWhite,
                   ),
                   Text(
-                    '125',
+                    '$restantTeamBPoint',
                     style: teamsLabelStyleWhite,
                   ),
                 ],

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 String teamAGamePoints = '0';
 String teamBGamePoints = '0';
+var textEditingcontroller;
 
 class TeamPointsBoard extends StatefulWidget {
   TeamPointsBoard({this.teamNumber, this.teamName, @required this.teamLetter});
@@ -82,16 +83,23 @@ class TeamInfo extends StatelessWidget {
   }
 }
 
-class TeamPointsIndicator extends StatelessWidget {
-  const TeamPointsIndicator(
+class TeamPointsIndicator extends StatefulWidget {
+  TeamPointsIndicator(
       {@required this.pointCircleRadius,
       @required this.teamPoints,
-      this.teamLetter});
+      this.teamLetter,
+      this.teamPointController});
 
   final double pointCircleRadius;
   final int teamPoints;
   final String teamLetter;
+  final TextEditingController teamPointController;
 
+  @override
+  _TeamPointsIndicatorState createState() => _TeamPointsIndicatorState();
+}
+
+class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -99,21 +107,21 @@ class TeamPointsIndicator extends StatelessWidget {
       children: <Widget>[
         CircleAvatar(
           backgroundColor: blue300,
-          radius: pointCircleRadius,
+          radius: widget.pointCircleRadius,
         ),
         SizedBox(
           width: 5,
         ),
         CircleAvatar(
           backgroundColor: blue300,
-          radius: pointCircleRadius,
+          radius: widget.pointCircleRadius,
         ),
         SizedBox(
           width: 5,
         ),
         CircleAvatar(
           backgroundColor: blue300,
-          radius: pointCircleRadius,
+          radius: widget.pointCircleRadius,
         ),
         SizedBox(
           width: 15,
@@ -121,15 +129,18 @@ class TeamPointsIndicator extends StatelessWidget {
         Container(
           width: 61,
           child: TextField(
+            controller: widget.teamPointController,
             onChanged: (inputNumber) {
               if (inputNumber == "") {
                 teamAGamePoints = '0';
                 teamBGamePoints = '0';
-              } else if (teamLetter == 'A' && inputNumber != "") {
+              } else if (widget.teamLetter == 'A' && inputNumber != "") {
                 teamAGamePoints = inputNumber;
-              } else if (teamLetter == 'B' && inputNumber != "") {
+              } else if (widget.teamLetter == 'B' && inputNumber != "") {
                 teamBGamePoints = inputNumber;
               }
+
+              textEditingcontroller = widget.teamPointController;
             },
             keyboardType: TextInputType.number,
             cursorColor: blue900,
