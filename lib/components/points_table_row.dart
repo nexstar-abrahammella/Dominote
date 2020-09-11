@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:dominote/utilities/styles.dart';
 
 class PointsTableRow extends StatefulWidget {
-  final Map<String,int> points;
+  final Map<String, int> points;
   final Map<String, int> fastPlay;
-  PointsTableRow({this.points,this.fastPlay});
+  PointsTableRow({this.points, this.fastPlay});
   @override
   _PointsTableRowState createState() => _PointsTableRowState();
 }
 
 class _PointsTableRowState extends State<PointsTableRow> {
-
-
   Widget fastPointsIndicators(int option) {
     final double pointCircleRadius = 5.0;
     List<Color> circleIndicatorColor = [blue300, blue300, blue300];
@@ -64,13 +62,14 @@ class _PointsTableRowState extends State<PointsTableRow> {
 
   @override
   Widget build(BuildContext context) {
-    bool roundWinnerTeamA = widget.points['teamA']>widget.points['teamB'];
+    bool roundWinnerTeamA = widget.points['teamA'] > widget.points['teamB'];
     return Container(
       padding: EdgeInsets.only(top: 12, left: 55, right: 55),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          teamPointsAndIndicator(points: widget.points['teamA'], roundWinner: roundWinnerTeamA),
+          teamPointsAndIndicator(
+              points: widget.points['teamA'], roundWinner: roundWinnerTeamA),
           CircleAvatar(
             backgroundColor: blue700,
             radius: 10,
@@ -79,7 +78,8 @@ class _PointsTableRowState extends State<PointsTableRow> {
               style: TextStyle(color: whiteColor),
             ),
           ),
-          teamPointsAndIndicator(points: widget.points['teamB'], roundWinner: !roundWinnerTeamA),
+          teamPointsAndIndicator(
+              points: widget.points['teamB'], roundWinner: !roundWinnerTeamA),
         ],
       ),
     );

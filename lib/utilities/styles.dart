@@ -58,9 +58,27 @@ const TextStyle teamNameTextStyle = TextStyle(
     color: whiteColor,
     fontSize: 18);
 
-const teamPointsInput = TextStyle(
-  fontSize: 30,
+const teamPointsHintTextInput = TextStyle(
+  fontSize: 23,
   color: blue300,
   fontWeight: FontWeight.bold,
   fontFamily: 'Monserrat',
+);
+
+const teamPointsInput = TextStyle(
+  fontSize: 23,
+  color: blue900,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const inputDecorationTeamPoint = InputDecoration(
+  enabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide.none,
+  ),
+  focusedBorder: UnderlineInputBorder(
+    borderSide: BorderSide.none,
+  ),
+  hintText: "0",
+  hintStyle: teamPointsHintTextInput,
 );

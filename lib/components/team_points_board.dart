@@ -1,34 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:dominote/utilities/styles.dart';
+import 'package:flutter/services.dart';
+
+String teamAGamePoints = '0';
+String teamBGamePoints = '0';
 
 class TeamPointsBoard extends StatefulWidget {
+  TeamPointsBoard({this.teamNumber, this.teamName, @required this.teamLetter});
+  final String teamNumber;
+  final String teamName;
+  final String teamLetter;
+
   @override
   _TeamPointsBoardState createState() => _TeamPointsBoardState();
 }
 
 class _TeamPointsBoardState extends State<TeamPointsBoard> {
-  final String teamNumber = "1";
-  final String teamName = "Los tigers";
-  final int teamPoints = 100;
   final double pointCircleRadius = 9;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
         children: <Widget>[
-          TeamInfo(teamNumber: teamNumber, teamName: teamName),
+          TeamInfo(teamNumber: widget.teamNumber, teamName: widget.teamName),
           SizedBox(
             height: 8,
           ),
           Container(
             height: 50,
+            width: 160,
             padding: EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
                 color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             child: TeamPointsIndicator(
-                pointCircleRadius: pointCircleRadius, teamPoints: teamPoints),
+              pointCircleRadius: pointCircleRadius,
+              teamLetter: widget.teamLetter,
+            ),
           ),
           FastPointsActions()
         ],
@@ -73,14 +83,14 @@ class TeamInfo extends StatelessWidget {
 }
 
 class TeamPointsIndicator extends StatelessWidget {
-  const TeamPointsIndicator({
-    Key key,
-    @required this.pointCircleRadius,
-    @required this.teamPoints,
-  }) : super(key: key);
+  const TeamPointsIndicator(
+      {@required this.pointCircleRadius,
+      @required this.teamPoints,
+      this.teamLetter});
 
   final double pointCircleRadius;
   final int teamPoints;
+  final String teamLetter;
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +118,30 @@ class TeamPointsIndicator extends StatelessWidget {
         SizedBox(
           width: 15,
         ),
-        Text(
-          teamPoints.toString(),
-          style: teamPointsInput,
-        ),
+        Container(
+          width: 61,
+          child: TextField(
+            onChanged: (inputNumber) {
+              if (inputNumber == "") {
+                teamAGamePoints = '0';
+                teamBGamePoints = '0';
+              } else if (teamLetter == 'A' && inputNumber != "") {
+                teamAGamePoints = inputNumber;
+              } else if (teamLetter == 'B' && inputNumber != "") {
+                teamBGamePoints = inputNumber;
+              }
+            },
+            keyboardType: TextInputType.number,
+            cursorColor: blue900,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(4),
+              WhitelistingTextInputFormatter.digitsOnly
+            ],
+            style: teamPointsInput,
+            textAlign: TextAlign.left,
+            decoration: inputDecorationTeamPoint,
+          ),
+        )
       ],
     );
   }
