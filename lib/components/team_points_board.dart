@@ -87,19 +87,18 @@ class TeamPointsIndicator extends StatefulWidget {
   TeamPointsIndicator(
       {@required this.pointCircleRadius,
       @required this.teamPoints,
-      this.teamLetter,
-      this.teamPointController});
+      this.teamLetter});
 
   final double pointCircleRadius;
   final int teamPoints;
   final String teamLetter;
-  final TextEditingController teamPointController;
 
   @override
   _TeamPointsIndicatorState createState() => _TeamPointsIndicatorState();
 }
 
 class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
+  var _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -129,7 +128,7 @@ class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
         Container(
           width: 61,
           child: TextField(
-            controller: widget.teamPointController,
+            controller: _controller,
             onChanged: (inputNumber) {
               if (inputNumber == "") {
                 teamAGamePoints = '0';
@@ -140,7 +139,7 @@ class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
                 teamBGamePoints = inputNumber;
               }
 
-              textEditingcontroller = widget.teamPointController;
+              textEditingcontroller = _controller;
             },
             keyboardType: TextInputType.number,
             cursorColor: blue900,
