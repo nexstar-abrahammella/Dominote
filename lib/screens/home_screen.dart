@@ -6,6 +6,7 @@ import 'package:dominote/components/game_information.dart';
 import '../utilities/internationalization_constants.dart';
 import 'package:dominote/components/points_table_row.dart';
 import 'package:dominote/utilities/internationalization_constants.dart';
+import 'package:dominote/components/testListBuilder.dart';
 
 import '../utilities/styles.dart';
 
@@ -16,8 +17,24 @@ int restantTeamAPoint = totalScore;
 int restantTeamBPoint = totalScore;
 bool isTeamAWinner = false;
 bool isTeamBWinner = false;
-
+int value = 0;
+List points = [];
 String locale = "es";
+
+void removeServiceCard(index) {
+  points.remove(index);
+}
+
+_buildRow(int index) {
+  return PointsTableRow(
+    points: {
+      'teamA': int.parse(points[index]["teamAPoints"]),
+      'teamB': int.parse(points[index]["teamBPoints"])
+    },
+    fastPlay: {'teamA': 1, 'teamB': 1},
+    indexRow: index + 1,
+  );
+}
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -52,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void saveButton() {
     setState(() {
+      addPointsGame();
       totalTeamAPoint += int.parse(teamAGamePoints);
       totalTeamBPoint += int.parse(teamBGamePoints);
       updateTotalScoreWinner();
@@ -80,12 +98,24 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void addPointsGame() {
+    points
+        .add({"teamAPoints": teamAGamePoints, "teamBPoints": teamBGamePoints});
+    _addItem();
+  }
+
   void resetGame() {
     totalTeamAPoint = 0;
     totalTeamBPoint = 0;
     totalScore = 200;
     restantTeamAPoint = totalScore;
     restantTeamBPoint = totalScore;
+  }
+
+  _addItem() {
+    setState(() {
+      value = value + 1;
+    });
   }
 
   @override
@@ -199,11 +229,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class PointsTable extends StatelessWidget {
-  const PointsTable({
-    Key key,
-  }) : super(key: key);
+class PointsTable extends StatefulWidget {
+  @override
+  _PointsTableState createState() => _PointsTableState();
+}
 
+class _PointsTableState extends State<PointsTable> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -238,13 +269,8 @@ class PointsTable extends StatelessWidget {
               child: Container(
                 color: whiteColor,
                 child: ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return PointsTableRow(
-                        points: {'teamA': 50, 'teamB': 60},
-                        fastPlay: {'teamA': 1, 'teamB': 1},
-                      );
-                    }),
+                    itemCount: value,
+                    itemBuilder: (context, index) => _buildRow(index)),
               ),
             ),
             Container(

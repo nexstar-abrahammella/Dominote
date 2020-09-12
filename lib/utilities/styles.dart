@@ -82,3 +82,10 @@ const inputDecorationTeamPoint = InputDecoration(
   hintText: "0",
   hintStyle: teamPointsHintTextInput,
 );
+
+const teamIndexStyle = TextStyle(
+  fontSize: 10,
+  color: whiteColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
