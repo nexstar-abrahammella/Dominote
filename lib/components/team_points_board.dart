@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 String teamAGamePoints = '0';
 String teamBGamePoints = '0';
 var textEditingcontroller;
+var teamAController;
+var teamBController;
 
 class TeamPointsBoard extends StatefulWidget {
   TeamPointsBoard({this.teamNumber, this.teamName, @required this.teamLetter});
@@ -135,8 +137,10 @@ class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
                 teamBGamePoints = '0';
               } else if (widget.teamLetter == 'A' && inputNumber != "") {
                 teamAGamePoints = inputNumber;
+                teamAController = _controller;
               } else if (widget.teamLetter == 'B' && inputNumber != "") {
                 teamBGamePoints = inputNumber;
+                teamBController = _controller;
               }
 
               textEditingcontroller = _controller;

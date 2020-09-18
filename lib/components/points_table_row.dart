@@ -7,7 +7,7 @@ class PointsTableRow extends StatefulWidget {
   final Map<String, int> points;
   final Map<String, int> fastPlay;
   final int indexRow;
-  final VoidCallback onDelete;
+  final Function onDelete;
 
   PointsTableRow({this.points, this.fastPlay, this.indexRow, this.onDelete});
   @override
@@ -101,13 +101,7 @@ class _PointsTableRowState extends State<PointsTableRow> {
               height: 25,
               width: 22,
               child: RawMaterialButton(
-                onPressed: () {
-                  setState(() {
-                    print('ok');
-                    points.removeAt(widget.indexRow);
-                    print(points);
-                  });
-                },
+                onPressed: widget.onDelete,
                 elevation: 2.0,
                 fillColor: blue300,
                 child: Icon(

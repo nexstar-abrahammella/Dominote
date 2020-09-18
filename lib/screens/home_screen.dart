@@ -6,7 +6,6 @@ import 'package:dominote/components/game_information.dart';
 import '../utilities/internationalization_constants.dart';
 import 'package:dominote/components/points_table_row.dart';
 import 'package:dominote/utilities/internationalization_constants.dart';
-import 'package:dominote/components/testListBuilder.dart';
 
 import '../utilities/styles.dart';
 
@@ -17,24 +16,9 @@ int restantTeamAPoint = totalScore;
 int restantTeamBPoint = totalScore;
 bool isTeamAWinner = false;
 bool isTeamBWinner = false;
-int value = 0;
-List points = [];
+int rowNumber = 0;
+List pointsList = [];
 String locale = "es";
-
-void removeServiceCard(index) {
-  points.remove(index);
-}
-
-_buildRow(int index) {
-  return PointsTableRow(
-    points: {
-      'teamA': int.parse(points[index]["teamAPoints"]),
-      'teamB': int.parse(points[index]["teamBPoints"])
-    },
-    fastPlay: {'teamA': 1, 'teamB': 1},
-    indexRow: index + 1,
-  );
-}
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -67,15 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void saveButton() {
+  void addPointsButtonFunction() {
     setState(() {
+      FocusScope.of(context).unfocus();
       addPointsGame();
       totalTeamAPoint += int.parse(teamAGamePoints);
       totalTeamBPoint += int.parse(teamBGamePoints);
       updateTotalScoreWinner();
       teamAGamePoints = '0';
       teamBGamePoints = '0';
-      textEditingcontroller.clear();
+      if (teamAController != null) teamAController.clear();
+      if (teamBController != null) teamBController.clear();
 
       print('Team A Has: $totalTeamAPoint | Team B Has: $totalTeamBPoint');
     });
@@ -99,9 +85,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void addPointsGame() {
-    points
-        .add({"teamAPoints": teamAGamePoints, "teamBPoints": teamBGamePoints});
-    _addItem();
+    if (teamAGamePoints == '0' && teamBGamePoints == '0') {
+    } else {
+      pointsList.add(
+          {"teamAPoints": teamAGamePoints, "teamBPoints": teamBGamePoints});
+      _addItem();
+    }
   }
 
   void resetGame() {
@@ -110,11 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
     totalScore = 200;
     restantTeamAPoint = totalScore;
     restantTeamBPoint = totalScore;
+    pointsList.length = 0;
   }
 
   _addItem() {
     setState(() {
-      value = value + 1;
+      rowNumber = rowNumber + 1;
     });
   }
 
@@ -207,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: saveButtonTextStyle,
                       ),
                       onPressed: () {
-                        saveButton();
+                        addPointsButtonFunction();
                       },
                       elevation: 2.0,
                       shape: RoundedRectangleBorder(
@@ -269,8 +259,30 @@ class _PointsTableState extends State<PointsTable> {
               child: Container(
                 color: whiteColor,
                 child: ListView.builder(
-                    itemCount: value,
-                    itemBuilder: (context, index) => _buildRow(index)),
+                    itemCount: pointsList.length,
+                    itemBuilder: (context, index) {
+                      return PointsTableRow(
+                        points: {
+                          'teamA': int.parse(pointsList[index]["teamAPoints"]),
+                          'teamB': int.parse(pointsList[index]["teamBPoints"])
+                        },
+                        fastPlay: {'teamA': 1, 'teamB': 1},
+                        indexRow: index + 1,
+                        onDelete: () {
+                          setState(() {
+                            totalTeamAPoint -=
+                                int.parse(pointsList[index]["teamAPoints"]);
+                            totalTeamBPoint -=
+                                int.parse(pointsList[index]["teamBPoints"]);
+                            restantTeamAPoint = totalScore - totalTeamAPoint;
+                            restantTeamBPoint = totalScore - totalTeamBPoint;
+                            pointsList.removeAt(index);
+
+                            print(index);
+                          });
+                        },
+                      );
+                    }),
               ),
             ),
             Container(
