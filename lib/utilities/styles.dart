@@ -89,3 +89,52 @@ const teamIndexStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Monserrat',
 );
+
+const congratulationStyle = TextStyle(
+  fontSize: 30,
+  color: blue900,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const teamWinnerTextStyle = TextStyle(
+  fontSize: 20,
+  color: blue300,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const teamWinnerStyle = TextStyle(
+  fontSize: 23,
+  color: blue900,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const scoreWinner = TextStyle(
+  fontSize: 45,
+  color: Colors.green,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const scoreLoser = TextStyle(
+  fontSize: 45,
+  color: Colors.red,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const dividerScoresStyle = TextStyle(
+  fontSize: 45,
+  color: blue200,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const buttonShareStyle = TextStyle(
+  fontSize: 23,
+  color: whiteColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);

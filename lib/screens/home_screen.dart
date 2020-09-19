@@ -6,6 +6,7 @@ import 'package:dominote/components/game_information.dart';
 import '../utilities/internationalization_constants.dart';
 import 'package:dominote/components/points_table_row.dart';
 import 'package:dominote/utilities/internationalization_constants.dart';
+import 'package:dominote/screens/game_winner_screen.dart';
 
 import '../utilities/styles.dart';
 
@@ -75,11 +76,13 @@ class _HomeScreenState extends State<HomeScreen> {
       }
       if (totalTeamAPoint >= totalScore) {
         resetGame();
-        showAlertDialog(context, 'El equipo A Gano.');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ConfettiSample()));
       }
       if (totalTeamBPoint >= totalScore) {
         resetGame();
-        showAlertDialog(context, 'El equipo B Gano.');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ConfettiSample()));
       }
     });
   }
