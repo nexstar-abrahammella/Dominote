@@ -7,6 +7,7 @@ import '../utilities/internationalization_constants.dart';
 import 'package:dominote/components/points_table_row.dart';
 import 'package:dominote/utilities/internationalization_constants.dart';
 import 'package:dominote/screens/game_winner_screen.dart';
+import 'package:dominote/screens/settings_screen.dart';
 
 import '../utilities/styles.dart';
 
@@ -153,7 +154,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 numberLabel: numberGamePoints,
                               ),
                               RawMaterialButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SettingsGame()));
+                                },
                                 fillColor: blue300,
                                 padding: EdgeInsets.all(5.0),
                                 shape: CircleBorder(),

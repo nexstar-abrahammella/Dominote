@@ -65,9 +65,30 @@ const teamPointsHintTextInput = TextStyle(
   fontFamily: 'Monserrat',
 );
 
+const teamNameHintTextInput = TextStyle(
+  fontSize: 18,
+  color: blue300,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const teamNameHintTextInputTeamB = TextStyle(
+  fontSize: 18,
+  color: blue300,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
 const teamPointsInput = TextStyle(
-  fontSize: 23,
-  color: blue900,
+  fontSize: 20,
+  color: Colors.blue,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const teamPointsInputTeamB = TextStyle(
+  fontSize: 20,
+  color: Colors.red,
   fontWeight: FontWeight.bold,
   fontFamily: 'Monserrat',
 );
@@ -132,9 +153,46 @@ const dividerScoresStyle = TextStyle(
   fontFamily: 'Monserrat',
 );
 
-const buttonShareStyle = TextStyle(
-  fontSize: 23,
+const textHeaderSettings = TextStyle(
+  fontSize: 18,
+  color: blue900,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const textOptionsSettings = TextStyle(
+  fontSize: 16,
+  color: Colors.blue,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const textOptionsSettingsTeamB = TextStyle(
+  fontSize: 16,
+  color: Colors.red,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const textButtonSaveSettings = TextStyle(
+  fontSize: 20,
   color: whiteColor,
   fontWeight: FontWeight.bold,
   fontFamily: 'Monserrat',
+);
+
+const boxDecorationSettings = BoxDecoration(
+    color: whiteColor, borderRadius: BorderRadius.all(Radius.circular(20)));
+
+const boxDecorationTeamName = BoxDecoration(
+    color: blue200, borderRadius: BorderRadius.all(Radius.circular(5)));
+
+const inputDecorationTeamNamePlayerOneSettings = InputDecoration(
+  hintText: "Jugador #1",
+  hintStyle: teamNameHintTextInput,
+);
+
+const inputDecorationTeamNamePlayerTwoSettings = InputDecoration(
+  hintText: "Jugador #2",
+  hintStyle: teamNameHintTextInput,
 );
