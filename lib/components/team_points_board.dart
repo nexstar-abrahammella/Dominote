@@ -1,34 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:domiote/utilities/styles.dart';
+import 'package:dominote/utilities/styles.dart';
+import 'package:flutter/services.dart';
+
+String teamAGamePoints = '0';
+String teamBGamePoints = '0';
+var textEditingcontroller;
+var teamAController;
+var teamBController;
 
 class TeamPointsBoard extends StatefulWidget {
+  TeamPointsBoard({this.teamNumber, this.teamName, @required this.teamLetter});
+  final String teamNumber;
+  final String teamName;
+  final String teamLetter;
+
   @override
   _TeamPointsBoardState createState() => _TeamPointsBoardState();
 }
 
 class _TeamPointsBoardState extends State<TeamPointsBoard> {
-  final String teamNumber = "1";
-  final String teamName = "Los tigers";
-  final int teamPoints = 100;
   final double pointCircleRadius = 9;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
         children: <Widget>[
-          TeamInfo(teamNumber: teamNumber, teamName: teamName),
+          TeamInfo(teamNumber: widget.teamNumber, teamName: widget.teamName),
           SizedBox(
             height: 8,
           ),
           Container(
             height: 50,
+            width: 160,
             padding: EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
                 color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             child: TeamPointsIndicator(
-                pointCircleRadius: pointCircleRadius, teamPoints: teamPoints),
+              pointCircleRadius: pointCircleRadius,
+              teamLetter: widget.teamLetter,
+            ),
           ),
           FastPointsActions()
         ],
@@ -56,11 +69,7 @@ class TeamInfo extends StatelessWidget {
           backgroundColor: blue300,
           child: Text(
             teamNumber,
-            style: TextStyle(
-                fontSize: 11,
-                color: whiteColor,
-                fontFamily: 'Monserrat',
-                fontWeight: FontWeight.bold),
+            style: teamNumberTextStyle,
           ),
           radius: 10,
         ),
@@ -69,27 +78,29 @@ class TeamInfo extends StatelessWidget {
         ),
         Text(
           teamName,
-          style: TextStyle(
-              fontFamily: 'Monserrat',
-              fontWeight: FontWeight.bold,
-              color: whiteColor,
-              fontSize: 18),
+          style: teamNameTextStyle,
         )
       ],
     );
   }
 }
 
-class TeamPointsIndicator extends StatelessWidget {
-  const TeamPointsIndicator({
-    Key key,
-    @required this.pointCircleRadius,
-    @required this.teamPoints,
-  }) : super(key: key);
+class TeamPointsIndicator extends StatefulWidget {
+  TeamPointsIndicator(
+      {@required this.pointCircleRadius,
+      @required this.teamPoints,
+      this.teamLetter});
 
   final double pointCircleRadius;
   final int teamPoints;
+  final String teamLetter;
 
+  @override
+  _TeamPointsIndicatorState createState() => _TeamPointsIndicatorState();
+}
+
+class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
+  var _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -97,34 +108,54 @@ class TeamPointsIndicator extends StatelessWidget {
       children: <Widget>[
         CircleAvatar(
           backgroundColor: blue300,
-          radius: pointCircleRadius,
+          radius: widget.pointCircleRadius,
         ),
         SizedBox(
           width: 5,
         ),
         CircleAvatar(
           backgroundColor: blue300,
-          radius: pointCircleRadius,
+          radius: widget.pointCircleRadius,
         ),
         SizedBox(
           width: 5,
         ),
         CircleAvatar(
           backgroundColor: blue300,
-          radius: pointCircleRadius,
+          radius: widget.pointCircleRadius,
         ),
         SizedBox(
           width: 15,
         ),
-        Text(
-          teamPoints.toString(),
-          style: TextStyle(
-            fontSize: 30,
-            color: blue300,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Monserrat',
+        Container(
+          width: 61,
+          child: TextField(
+            controller: _controller,
+            onChanged: (inputNumber) {
+              if (inputNumber == "") {
+                teamAGamePoints = '0';
+                teamBGamePoints = '0';
+              } else if (widget.teamLetter == 'A' && inputNumber != "") {
+                teamAGamePoints = inputNumber;
+                teamAController = _controller;
+              } else if (widget.teamLetter == 'B' && inputNumber != "") {
+                teamBGamePoints = inputNumber;
+                teamBController = _controller;
+              }
+
+              textEditingcontroller = _controller;
+            },
+            keyboardType: TextInputType.number,
+            cursorColor: blue900,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(4),
+              WhitelistingTextInputFormatter.digitsOnly
+            ],
+            style: teamPointsInput,
+            textAlign: TextAlign.left,
+            decoration: inputDecorationTeamPoint,
           ),
-        ),
+        )
       ],
     );
   }
