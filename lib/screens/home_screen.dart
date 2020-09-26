@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../utilities/styles.dart';
 import '../utilities/constants.dart';
 import 'package:dominote/components/team_points_board.dart';
@@ -8,53 +9,61 @@ import 'package:dominote/components/points_table_row.dart';
 import 'package:dominote/utilities/internationalization_constants.dart';
 import 'package:dominote/screens/game_winner_screen.dart';
 import 'package:dominote/screens/settings_screen.dart';
+import 'package:dominote/models/gameDataInformation.dart';
 
 import '../utilities/styles.dart';
 
 int totalTeamAPoint = 0;
 int totalTeamBPoint = 0;
-int totalScore = 200;
-int restantTeamAPoint = totalScore;
-int restantTeamBPoint = totalScore;
 bool isTeamAWinner = false;
 bool isTeamBWinner = false;
 int rowNumber = 0;
 List pointsList = [];
-String locale = "es";
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
+  Widget build(BuildContext context) {
+    final gameData = Provider.of<GameDataInformation>(context);
 
-class _HomeScreenState extends State<HomeScreen> {
-  showAlertDialog(BuildContext context, String textMessage) {
-    // set up the button
-    Widget okButton = FlatButton(
-      child: Text("OK"),
-      onPressed: () {},
-    );
+    void addItem() {
+      rowNumber = rowNumber + 1;
+    }
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("My title"),
-      content: Text("$textMessage"),
-      actions: [
-        okButton,
-      ],
-    );
+    void addPointsGame() {
+      if (teamAGamePoints == '0' && teamBGamePoints == '0') {
+      } else {
+        pointsList.add(
+            {"teamAPoints": teamAGamePoints, "teamBPoints": teamBGamePoints});
+        addItem();
+      }
+    }
 
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+    void updateTotalScoreWinner() {
+      if (totalTeamAPoint < gameData.totalScore ||
+          totalTeamBPoint < gameData.totalScore) {
+        gameData.updateGame();
+      }
+      if (totalTeamAPoint >= gameData.totalScore) {
+        gameData.teamAWin = true;
+        gameData.teamBWin = false;
+        gameData.totalTeamAScoreNumber = totalTeamAPoint.toString();
+        gameData.totalTeamBScoreNumber = totalTeamBPoint.toString();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => GameWinner()));
+        gameData.resetGame();
+      }
+      if (totalTeamBPoint >= gameData.totalScore) {
+        gameData.teamAWin = false;
+        gameData.teamBWin = true;
+        gameData.totalTeamAScoreNumber = totalTeamAPoint.toString();
+        gameData.totalTeamBScoreNumber = totalTeamBPoint.toString();
+        gameData.resetGame();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => GameWinner()));
+      }
+    }
 
-  void addPointsButtonFunction() {
-    setState(() {
+    void addPointsButtonFunction() {
       FocusScope.of(context).unfocus();
       addPointsGame();
       totalTeamAPoint += int.parse(teamAGamePoints);
@@ -66,54 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
       if (teamBController != null) teamBController.clear();
 
       print('Team A Has: $totalTeamAPoint | Team B Has: $totalTeamBPoint');
-    });
-  }
-
-  void updateTotalScoreWinner() {
-    setState(() {
-      if (totalTeamAPoint < totalScore || restantTeamBPoint < totalScore) {
-        restantTeamAPoint = totalScore - totalTeamAPoint;
-        restantTeamBPoint = totalScore - totalTeamBPoint;
-      }
-      if (totalTeamAPoint >= totalScore) {
-        resetGame();
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ConfettiSample()));
-      }
-      if (totalTeamBPoint >= totalScore) {
-        resetGame();
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ConfettiSample()));
-      }
-    });
-  }
-
-  void addPointsGame() {
-    if (teamAGamePoints == '0' && teamBGamePoints == '0') {
-    } else {
-      pointsList.add(
-          {"teamAPoints": teamAGamePoints, "teamBPoints": teamBGamePoints});
-      _addItem();
     }
-  }
 
-  void resetGame() {
-    totalTeamAPoint = 0;
-    totalTeamBPoint = 0;
-    totalScore = 200;
-    restantTeamAPoint = totalScore;
-    restantTeamBPoint = totalScore;
-    pointsList.length = 0;
-  }
-
-  _addItem() {
-    setState(() {
-      rowNumber = rowNumber + 1;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
@@ -145,13 +108,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: <Widget>[
                               GameHeaderInformation(
                                 textLabel: i18n(
-                                    locale: locale, value: "i18n.seriesTitle"),
-                                numberLabel: seriesNumber,
+                                    locale: gameData.applicationLanguage,
+                                    value: "i18n.seriesTitle"),
+                                numberLabel: gameData.seriesNumber,
                               ),
                               GameHeaderInformation(
-                                textLabel:
-                                    i18n(locale: locale, value: "i18n.points"),
-                                numberLabel: numberGamePoints,
+                                textLabel: i18n(
+                                    locale: gameData.applicationLanguage,
+                                    value: "i18n.points"),
+                                numberLabel: gameData.totalScore.toString(),
                               ),
                               RawMaterialButton(
                                 onPressed: () {
@@ -178,12 +143,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   TeamPointsBoard(
                     teamNumber: "1",
-                    teamName: "Equipo 1",
+                    teamName: gameData.teamAName,
                     teamLetter: 'A',
                   ),
                   TeamPointsBoard(
                     teamNumber: "2",
-                    teamName: "Equipo 2",
+                    teamName: gameData.teamBName,
                     teamLetter: 'B',
                   ),
                 ],
@@ -203,7 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: RawMaterialButton(
                       child: Text(
-                        i18n(locale: locale, value: "i18n.save"),
+                        i18n(
+                            locale: gameData.applicationLanguage,
+                            value: "i18n.save"),
                         style: saveButtonTextStyle,
                       ),
                       onPressed: () {
@@ -237,6 +204,8 @@ class PointsTable extends StatefulWidget {
 class _PointsTableState extends State<PointsTable> {
   @override
   Widget build(BuildContext context) {
+    final gameData = Provider.of<GameDataInformation>(context);
+
     return Expanded(
       child: Container(
         padding: EdgeInsets.only(left: 12, right: 12),
@@ -255,11 +224,11 @@ class _PointsTableState extends State<PointsTable> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text(
-                    'Equipo A',
+                    gameData.teamAName,
                     style: teamsLabelStyle,
                   ),
                   Text(
-                    'Equipo B',
+                    gameData.teamBName,
                     style: teamsLabelStyle,
                   ),
                 ],
@@ -284,8 +253,7 @@ class _PointsTableState extends State<PointsTable> {
                                 int.parse(pointsList[index]["teamAPoints"]);
                             totalTeamBPoint -=
                                 int.parse(pointsList[index]["teamBPoints"]);
-                            restantTeamAPoint = totalScore - totalTeamAPoint;
-                            restantTeamBPoint = totalScore - totalTeamBPoint;
+                            gameData.updateGame();
                             pointsList.removeAt(index);
 
                             print(index);
@@ -306,7 +274,9 @@ class _PointsTableState extends State<PointsTable> {
                     style: teamsLabelStyle,
                   ),
                   Text(
-                    i18n(locale: locale, value: "i18n.points"),
+                    i18n(
+                        locale: gameData.applicationLanguage,
+                        value: "i18n.points"),
                     style: teamsLabelStyle,
                   ),
                   Text(
@@ -329,15 +299,17 @@ class _PointsTableState extends State<PointsTable> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text(
-                    '$restantTeamAPoint',
+                    '${gameData.restantTeamAPoint}',
                     style: teamsLabelStyleWhite,
                   ),
                   Text(
-                    i18n(locale: locale, value: "i18n.restants"),
+                    i18n(
+                        locale: gameData.applicationLanguage,
+                        value: "i18n.restants"),
                     style: teamsLabelStyleWhite,
                   ),
                   Text(
-                    '$restantTeamBPoint',
+                    '${gameData.restantTeamBPoint}',
                     style: teamsLabelStyleWhite,
                   ),
                 ],

@@ -3,17 +3,21 @@ import 'package:confetti/confetti.dart';
 import 'package:dominote/utilities/styles.dart';
 import 'dart:math';
 import 'package:lottie/lottie.dart';
+import 'package:dominote/utilities/internationalization_constants.dart';
+import 'package:provider/provider.dart';
+import 'package:dominote/models/gameDataInformation.dart';
+import 'home_screen.dart';
 
-class ConfettiSample extends StatefulWidget {
-  ConfettiSample({this.teamWinner});
+class GameWinner extends StatefulWidget {
+  GameWinner({this.teamWinner});
 
   final String teamWinner;
 
   @override
-  _ConfettiSampleState createState() => _ConfettiSampleState();
+  _GameWinnerState createState() => _GameWinnerState();
 }
 
-class _ConfettiSampleState extends State<ConfettiSample> {
+class _GameWinnerState extends State<GameWinner> {
   ConfettiController myController;
   int _counter = 0;
 
@@ -27,10 +31,11 @@ class _ConfettiSampleState extends State<ConfettiSample> {
   }
 
   Widget build(BuildContext context) {
+    final gameData = Provider.of<GameDataInformation>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Resultados',
+          i18n(locale: gameData.applicationLanguage, value: "i18n.results"),
           style: congratulationStyle,
         ),
         backgroundColor: blue200,
@@ -77,8 +82,9 @@ class _ConfettiSampleState extends State<ConfettiSample> {
                                   BorderRadius.all(Radius.circular(10))),
                           child: Center(
                             child: Text(
-                              '200',
-                              style: scoreWinner,
+                              gameData.totalTeamAScoreNumber,
+                              style:
+                                  gameData.teamAWin ? scoreWinner : scoreLoser,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -109,8 +115,9 @@ class _ConfettiSampleState extends State<ConfettiSample> {
                                   BorderRadius.all(Radius.circular(10))),
                           child: Center(
                             child: Text(
-                              '85',
-                              style: scoreLoser,
+                              gameData.totalTeamBScoreNumber,
+                              style:
+                                  gameData.teamBWin ? scoreWinner : scoreLoser,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -123,12 +130,14 @@ class _ConfettiSampleState extends State<ConfettiSample> {
             ),
             SizedBox(height: 20),
             Text(
-              'El equipo ganador es:',
+              i18n(
+                  locale: gameData.applicationLanguage,
+                  value: "i18n.theWinnerIs"),
               style: teamWinnerTextStyle,
             ),
             SizedBox(height: 10),
             Text(
-              'Abraham & Julio',
+              gameData.teamPlayersName(),
               style: teamWinnerStyle,
             ),
             ConfettiWidget(
