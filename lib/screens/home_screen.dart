@@ -19,10 +19,17 @@ bool isTeamAWinner = false;
 bool isTeamBWinner = false;
 int rowNumber = 0;
 List pointsList = [];
+var contextBuilder;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    contextBuilder = context;
     final gameData = Provider.of<GameDataInformation>(context);
 
     void addItem() {
@@ -82,107 +89,170 @@ class HomeScreen extends StatelessWidget {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
-        backgroundColor: blue700,
+        backgroundColor: blue300,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0.0,
-          centerTitle: false,
-          title: Text(headerTitle, style: headerTextStyle),
-          backgroundColor: blue700,
+          backgroundColor: blue900,
+          actions: <Widget>[
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(5.0),
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        GameHeaderInformation(
+                          textLabel: i18n(
+                              locale: gameData.applicationLanguage,
+                              value: "i18n.seriesTitle"),
+                          numberLabel: gameData.seriesNumber,
+                        ),
+                        GameHeaderInformation(
+                          textLabel: i18n(
+                              locale: gameData.applicationLanguage,
+                              value: "i18n.points"),
+                          numberLabel: gameData.totalScore.toString(),
+                        ),
+                        RawMaterialButton(
+                          child: Icon(
+                            Icons.settings,
+                            size: 25.0,
+                            color: blue900,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SettingsGame()));
+                          },
+                          fillColor: whiteColor,
+                          padding: EdgeInsets.all(5.0),
+                          shape: CircleBorder(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
         body: SafeArea(
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(5.0),
-                      decoration: gameInformationBorderDecoration,
-                      child: Wrap(
-                        direction: Axis.horizontal,
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              GameHeaderInformation(
-                                textLabel: i18n(
-                                    locale: gameData.applicationLanguage,
-                                    value: "i18n.seriesTitle"),
-                                numberLabel: gameData.seriesNumber,
-                              ),
-                              GameHeaderInformation(
-                                textLabel: i18n(
-                                    locale: gameData.applicationLanguage,
-                                    value: "i18n.points"),
-                                numberLabel: gameData.totalScore.toString(),
-                              ),
-                              RawMaterialButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SettingsGame()));
-                                },
-                                fillColor: blue300,
-                                padding: EdgeInsets.all(5.0),
-                                shape: CircleBorder(),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  TeamPointsBoard(
-                    teamNumber: "1",
-                    teamName: gameData.teamAName,
-                    teamLetter: 'A',
-                  ),
-                  TeamPointsBoard(
-                    teamNumber: "2",
-                    teamName: gameData.teamBName,
-                    teamLetter: 'B',
-                  ),
-                ],
-              ),
+//              Row(
+//                mainAxisAlignment: MainAxisAlignment.start,
+//                children: <Widget>[
+//                  Expanded(
+//                    child: Container(
+//                      padding: const EdgeInsets.all(5.0),
+//                      child: Wrap(
+//                        direction: Axis.horizontal,
+//                        crossAxisAlignment: WrapCrossAlignment.start,
+//                        children: [
+//                          Row(
+//                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                            children: <Widget>[
+//                              GameHeaderInformation(
+//                                textLabel: i18n(
+//                                    locale: gameData.applicationLanguage,
+//                                    value: "i18n.seriesTitle"),
+//                                numberLabel: gameData.seriesNumber,
+//                              ),
+//                              GameHeaderInformation(
+//                                textLabel: i18n(
+//                                    locale: gameData.applicationLanguage,
+//                                    value: "i18n.points"),
+//                                numberLabel: gameData.totalScore.toString(),
+//                              ),
+//                              RawMaterialButton(
+//                                child: Icon(
+//                                  Icons.settings,
+//                                  size: 25.0,
+//                                ),
+//                                onPressed: () {
+//                                  Navigator.push(
+//                                      context,
+//                                      MaterialPageRoute(
+//                                          builder: (context) =>
+//                                              SettingsGame()));
+//                                },
+//                                fillColor: blue300,
+//                                padding: EdgeInsets.all(5.0),
+//                                shape: CircleBorder(),
+//                              ),
+//                            ],
+//                          ),
+//                        ],
+//                      ),
+//                    ),
+//                  )
+//                ],
+//              ),
               SizedBox(
-                height: 20.0,
+                height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 40,
-                    width: 110,
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              Container(
+                width: 385,
+                height: 210,
+                decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        TeamPointsBoard(
+                          teamNumber: "1",
+                          teamName: gameData.teamAName,
+                          teamLetter: 'A',
+                        ),
+                        TeamPointsBoard(
+                          teamNumber: "2",
+                          teamName: gameData.teamBName,
+                          teamLetter: 'B',
+                        ),
+                      ],
                     ),
-                    child: RawMaterialButton(
-                      child: Text(
-                        i18n(
-                            locale: gameData.applicationLanguage,
-                            value: "i18n.save"),
-                        style: saveButtonTextStyle,
-                      ),
-                      onPressed: () {
-                        addPointsButtonFunction();
-                      },
-                      elevation: 2.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+                    SizedBox(
+                      height: 20.0,
                     ),
-                  )
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          height: 40,
+                          width: 110,
+                          decoration: BoxDecoration(
+                            color: blue300,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          child: RawMaterialButton(
+                            child: Text(
+                              i18n(
+                                  locale: gameData.applicationLanguage,
+                                  value: "i18n.save"),
+                              style: saveButtonTextStyle,
+                            ),
+                            onPressed: () {
+                              addPointsButtonFunction();
+                            },
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 10.0,
@@ -245,7 +315,7 @@ class _PointsTableState extends State<PointsTable> {
                           'teamA': int.parse(pointsList[index]["teamAPoints"]),
                           'teamB': int.parse(pointsList[index]["teamBPoints"])
                         },
-                        fastPlay: {'teamA': 1, 'teamB': 1},
+                        fastPlay: {'teamA': 2, 'teamB': 2},
                         indexRow: index + 1,
                         onDelete: () {
                           setState(() {

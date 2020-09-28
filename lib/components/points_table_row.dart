@@ -15,39 +15,10 @@ class PointsTableRow extends StatefulWidget {
 }
 
 class _PointsTableRowState extends State<PointsTableRow> {
-  Widget fastPointsIndicators(int option) {
-    final double pointCircleRadius = 5.0;
-    List<Color> circleIndicatorColor = [blue300, blue300, blue300];
-    circleIndicatorColor[option] = blue700;
-    return Row(
-      children: <Widget>[
-        CircleAvatar(
-          backgroundColor: circleIndicatorColor[0],
-          radius: pointCircleRadius,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        CircleAvatar(
-          backgroundColor: circleIndicatorColor[1],
-          radius: pointCircleRadius,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        CircleAvatar(
-          backgroundColor: circleIndicatorColor[2],
-          radius: pointCircleRadius,
-        ),
-      ],
-    );
-  }
-
   Widget teamPointsAndIndicator({int points = 0, bool roundWinner}) {
     return Container(
       child: Row(
         children: <Widget>[
-          fastPointsIndicators(2),
           SizedBox(
             width: 10,
           ),
@@ -56,7 +27,7 @@ class _PointsTableRowState extends State<PointsTableRow> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
-              fontSize: 17,
+              fontSize: 22,
               color: (roundWinner) ? blue700 : blue300,
             ),
           )
@@ -74,14 +45,15 @@ class _PointsTableRowState extends State<PointsTableRow> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 15.0),
+            padding: EdgeInsets.only(left: 30.0),
             width: 120,
             child: teamPointsAndIndicator(
                 points: widget.points['teamA'], roundWinner: roundWinnerTeamA),
           ),
+          SizedBox(),
           Container(
             height: 30,
-            width: 20,
+            width: 25,
             child: CircleAvatar(
               backgroundColor: blue700,
               radius: 10,
@@ -92,7 +64,7 @@ class _PointsTableRowState extends State<PointsTableRow> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left: 15.0),
+            padding: EdgeInsets.only(left: 40.0),
             width: 100,
             child: teamPointsAndIndicator(
                 points: widget.points['teamB'], roundWinner: !roundWinnerTeamA),

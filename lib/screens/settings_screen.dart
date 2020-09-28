@@ -30,14 +30,14 @@ class _SettingsGameState extends State<SettingsGame> {
                 value: "i18n.configurations"),
             style: congratulationStyle,
           ),
-          backgroundColor: blue200,
+          backgroundColor: blue900,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: blue900),
+            icon: Icon(Icons.arrow_back_ios, color: whiteColor),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        backgroundColor: blue200,
+        backgroundColor: whiteColor,
         body: SingleChildScrollView(
           child: Center(
             child: Container(

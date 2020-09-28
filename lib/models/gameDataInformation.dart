@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dominote/screens/home_screen.dart';
 import 'package:dominote/utilities/internationalization_constants.dart';
+import 'package:dominote/components/team_points_board.dart';
+import 'package:dominote/screens/game_winner_screen.dart';
 
 class GameDataInformation with ChangeNotifier {
   int _totalScore = 200;
@@ -103,7 +105,6 @@ class GameDataInformation with ChangeNotifier {
     var isPlayersInputNotNullOrBlank = !(playerOneNull) & !playerTwoNull;
     var isPlayerOneNotNullAndPlayerTwoIsNull = !playerOneNull && playerTwoNull;
     var isPlayerOneNullAndPlayerTwoIsNotNull = playerOneNull && !playerTwoNull;
-
     if (isPlayerBlanksOrNull) {
       this._teamA = teamANameText;
     } else if (isPlayersInputNotNullOrBlank)
@@ -125,6 +126,58 @@ class GameDataInformation with ChangeNotifier {
       return this._teamB;
     }
   }
+
+  void addItem() {
+    rowNumber = rowNumber + 1;
+    notifyListeners();
+  }
+
+//  void updateTotalScoreWinner() {
+//    if (totalTeamAPoint < totalScore || totalTeamBPoint < totalScore) {
+//      updateGame();
+//    }
+//    if (totalTeamAPoint >= totalScore) {
+//      teamAWin = true;
+//      teamBWin = false;
+//      totalTeamAScoreNumber = totalTeamAPoint.toString();
+//      totalTeamBScoreNumber = totalTeamBPoint.toString();
+//      Navigator.push(contextBuilder,
+//          MaterialPageRoute(builder: (contextBuilder) => GameWinner()));
+//      resetGame();
+//    }
+//    if (totalTeamBPoint >= totalScore) {
+//      teamAWin = false;
+//      teamBWin = true;
+//      totalTeamAScoreNumber = totalTeamAPoint.toString();
+//      totalTeamBScoreNumber = totalTeamBPoint.toString();
+//      resetGame();
+//      Navigator.push(contextBuilder,
+//          MaterialPageRoute(builder: (contextBuilder) => GameWinner()));
+//    }
+//    notifyListeners();
+//  }
+//
+//  void addPointsGame() {
+//    if (teamAGamePoints == '0' && teamBGamePoints == '0') {
+//    } else {
+//      pointsList.add(
+//          {"teamAPoints": teamAGamePoints, "teamBPoints": teamBGamePoints});
+//      addItem();
+//    }
+//    notifyListeners();
+//  }
+//
+//  void addPointsButtonFunction() {
+//    addPointsGame();
+//    totalTeamAPoint += int.parse(teamAGamePoints);
+//    totalTeamBPoint += int.parse(teamBGamePoints);
+//    updateTotalScoreWinner();
+//    teamAGamePoints = '0';
+//    teamBGamePoints = '0';
+//
+//    notifyListeners();
+//    print('Team A Has: $totalTeamAPoint | Team B Has: $totalTeamBPoint');
+//  }
 
   void playersInputName() {
     teamAPlayerOneController = TextEditingController(text: playerOneTeamA);

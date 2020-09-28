@@ -22,14 +22,14 @@ class _GameHeaderInformationState extends State<GameHeaderInformation> {
               children: <Widget>[
                 Text(
                   widget.textLabel,
-                  style: gameInformationLabelStyle,
+                  style: gameInformationTextLabelStyle,
                 ),
                 Container(
                   margin: const EdgeInsets.all(4.0),
                   padding: EdgeInsets.all(6.0),
                   width: 70,
                   decoration: BoxDecoration(
-                      color: blue900,
+                      color: whiteColor,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Text(
                     widget.numberLabel,

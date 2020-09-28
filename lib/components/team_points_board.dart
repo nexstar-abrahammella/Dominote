@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dominote/utilities/styles.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:dominote/models/gameDataInformation.dart';
 
 String teamAGamePoints = '0';
 String teamBGamePoints = '0';
@@ -23,6 +25,7 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
 
   @override
   Widget build(BuildContext context) {
+    final gameData = Provider.of<GameDataInformation>(context);
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
@@ -33,17 +36,19 @@ class _TeamPointsBoardState extends State<TeamPointsBoard> {
           ),
           Container(
             height: 50,
-            width: 160,
+            width: 140,
             padding: EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
-                color: whiteColor,
+                color: blue900,
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             child: TeamPointsIndicator(
               pointCircleRadius: pointCircleRadius,
               teamLetter: widget.teamLetter,
             ),
           ),
-          FastPointsActions()
+          FastPointsActions(
+            teamLetter: widget.teamLetter,
+          )
         ],
       ),
     );
@@ -106,27 +111,6 @@ class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        CircleAvatar(
-          backgroundColor: blue300,
-          radius: widget.pointCircleRadius,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        CircleAvatar(
-          backgroundColor: blue300,
-          radius: widget.pointCircleRadius,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        CircleAvatar(
-          backgroundColor: blue300,
-          radius: widget.pointCircleRadius,
-        ),
-        SizedBox(
-          width: 15,
-        ),
         Container(
           width: 61,
           child: TextField(
@@ -162,6 +146,9 @@ class _TeamPointsIndicatorState extends State<TeamPointsIndicator> {
 }
 
 class FastPointsActions extends StatefulWidget {
+  FastPointsActions({this.teamLetter});
+
+  final String teamLetter;
   @override
   _FastPointsActionsState createState() => _FastPointsActionsState();
 }
@@ -169,49 +156,76 @@ class FastPointsActions extends StatefulWidget {
 class _FastPointsActionsState extends State<FastPointsActions> {
   @override
   Widget build(BuildContext context) {
+    final gameData = Provider.of<GameDataInformation>(context);
+
+    void addFastPoint(String teamLetter, String points) {
+      if (teamLetter == 'A') {
+        teamAGamePoints = points;
+//        gameData.addPointsButtonFunction();
+      } else if (teamLetter == 'B') {
+        teamBGamePoints = points;
+//        gameData.addPointsButtonFunction();
+      }
+    }
+
     return Container(
       padding: EdgeInsets.only(top: 10),
       child: Row(
         children: <Widget>[
-          ClipOval(
-            child: Material(
-              color: blue300, // button color
-              child: InkWell(
-                child: SizedBox(
-                  width: 32,
-                  height: 32,
+          GestureDetector(
+            onTap: () => addFastPoint(widget.teamLetter, '25'),
+            child: ClipOval(
+              child: Container(
+                color: blue900,
+                height: 32.0,
+                width: 32.0,
+                child: Center(
+                  child: Text(
+                    '25',
+                    style: textFastPoint,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                onTap: () {},
               ),
             ),
           ),
           SizedBox(
             width: 25,
           ),
-          ClipOval(
-            child: Material(
-              color: blue300, // button color
-              child: InkWell(
-                child: SizedBox(
-                  width: 32,
-                  height: 32,
+          GestureDetector(
+            onTap: () => addFastPoint(widget.teamLetter, '30'),
+            child: ClipOval(
+              child: Container(
+                color: blue900,
+                height: 32.0,
+                width: 32.0,
+                child: Center(
+                  child: Text(
+                    '30',
+                    style: textFastPoint,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                onTap: () {},
               ),
             ),
           ),
           SizedBox(
             width: 25,
           ),
-          ClipOval(
-            child: Material(
-              color: blue300, // button color
-              child: InkWell(
-                child: SizedBox(
-                  width: 32,
-                  height: 32,
+          GestureDetector(
+            onTap: () => addFastPoint(widget.teamLetter, '50'),
+            child: ClipOval(
+              child: Container(
+                color: blue900,
+                height: 32.0,
+                width: 32.0,
+                child: Center(
+                  child: Text(
+                    '50',
+                    style: textFastPoint,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                onTap: () {},
               ),
             ),
           ),

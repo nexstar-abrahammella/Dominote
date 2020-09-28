@@ -16,6 +16,12 @@ const headerTextStyle = TextStyle(
 
 const gameInformationLabelStyle = TextStyle(
   fontFamily: 'Monserrat',
+  color: blue900,
+  fontSize: 16.0,
+);
+
+const gameInformationTextLabelStyle = TextStyle(
+  fontFamily: 'Monserrat',
   color: whiteColor,
   fontSize: 16.0,
 );
@@ -41,7 +47,7 @@ const gameInformationBorderDecoration = BoxDecoration(
 
 const saveButtonTextStyle = TextStyle(
   fontFamily: 'Monserrat',
-  color: blue300,
+  color: whiteColor,
   fontSize: 20.0,
   fontWeight: FontWeight.w800,
 );
@@ -55,7 +61,7 @@ const TextStyle teamNumberTextStyle = TextStyle(
 const TextStyle teamNameTextStyle = TextStyle(
     fontFamily: 'Monserrat',
     fontWeight: FontWeight.bold,
-    color: whiteColor,
+    color: blue900,
     fontSize: 18);
 
 const teamPointsHintTextInput = TextStyle(
@@ -105,7 +111,7 @@ const inputDecorationTeamPoint = InputDecoration(
 );
 
 const teamIndexStyle = TextStyle(
-  fontSize: 10,
+  fontSize: 12,
   color: whiteColor,
   fontWeight: FontWeight.bold,
   fontFamily: 'Monserrat',
@@ -113,7 +119,7 @@ const teamIndexStyle = TextStyle(
 
 const congratulationStyle = TextStyle(
   fontSize: 30,
-  color: blue900,
+  color: whiteColor,
   fontWeight: FontWeight.bold,
   fontFamily: 'Monserrat',
 );
@@ -163,6 +169,13 @@ const textHeaderSettings = TextStyle(
 const textOptionsSettings = TextStyle(
   fontSize: 16,
   color: Colors.blue,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Monserrat',
+);
+
+const textFastPoint = TextStyle(
+  fontSize: 16,
+  color: whiteColor,
   fontWeight: FontWeight.bold,
   fontFamily: 'Monserrat',
 );
