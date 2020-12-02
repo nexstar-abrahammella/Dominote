@@ -1,5 +1,5 @@
-name: dominote
-description: A new Flutter project.
+name: apuntalo
+description: Domino ScoreKeeper for the best players.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   confetti: ^0.5.4+1
   lottie: ^0.6.0
+  provider: ^4.3.2+2
 
 
 

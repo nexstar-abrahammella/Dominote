@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:dominote/screens/home_screen.dart';
-import 'package:dominote/utilities/internationalization_constants.dart';
-import 'package:dominote/components/team_points_board.dart';
-import 'package:dominote/screens/game_winner_screen.dart';
+import 'package:apuntalo/screens/home_screen.dart';
+import 'package:apuntalo/utilities/internationalization_constants.dart';
+import 'package:apuntalo/components/team_points_board.dart';
+import 'package:apuntalo/screens/game_winner_screen.dart';
 
 class GameDataInformation with ChangeNotifier {
   int _totalScore = 200;

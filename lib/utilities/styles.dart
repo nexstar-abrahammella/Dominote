@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 //colors
 
-const blue700 = Color(0xff3A3E47);
+const blue400 = Color(0xff0B84FF);
+const blue500 = Color(0xff3172D4);
+const blue700 = Color(0xff004B97);
+const blue800 = Color(0xff00377E);
+const blue300 = Color(0xff1D2233);
 const blue900 = Color(0xff1D2233);
-const blue300 = Color(0xffA8ADB8);
-const blue200 = Color(0xffEFF2F7);
+const blue200 = Color(0xffA8ADB8);
 const whiteColor = Color(0xffFFFFFF);
 
 const headerTextStyle = TextStyle(
@@ -208,4 +211,10 @@ const inputDecorationTeamNamePlayerOneSettings = InputDecoration(
 const inputDecorationTeamNamePlayerTwoSettings = InputDecoration(
   hintText: "Jugador #2",
   hintStyle: teamNameHintTextInput,
+);
+
+const headerGradient = LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomRight, // 10% of the width, so there are ten blinds.
+  colors: [blue700, blue800],
 );

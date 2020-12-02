@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dominote/utilities/styles.dart';
-import 'package:dominote/screens/home_screen.dart';
+import 'package:apuntalo/utilities/styles.dart';
+import 'package:apuntalo/screens/home_screen.dart';
 
 class PointsTableRow extends StatefulWidget {
   final Map<String, int> points;

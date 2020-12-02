@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:confetti/confetti.dart';
-import 'package:dominote/utilities/styles.dart';
+import 'package:apuntalo/utilities/styles.dart';
 import 'dart:math';
 import 'package:lottie/lottie.dart';
-import 'package:dominote/utilities/internationalization_constants.dart';
+import 'package:apuntalo/utilities/internationalization_constants.dart';
 import 'package:provider/provider.dart';
-import 'package:dominote/models/gameDataInformation.dart';
+import 'package:apuntalo/models/gameDataInformation.dart';
 import 'home_screen.dart';
 
 class GameWinner extends StatefulWidget {

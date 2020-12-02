@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:dominote/utilities/styles.dart';
+import 'package:apuntalo/utilities/styles.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:dominote/models/gameDataInformation.dart';
+import 'package:apuntalo/models/gameDataInformation.dart';
 
 String teamAGamePoints = '0';
 String teamBGamePoints = '0';

@@ -1,4 +1,4 @@
-package com.dreamex.dominote
+package com.dreamex.apuntalo
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

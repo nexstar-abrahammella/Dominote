@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../utilities/styles.dart';
 import '../utilities/constants.dart';
-import 'package:dominote/components/team_points_board.dart';
-import 'package:dominote/components/game_information.dart';
+import 'package:apuntalo/components/team_points_board.dart';
+import 'package:apuntalo/components/game_information.dart';
 import '../utilities/internationalization_constants.dart';
-import 'package:dominote/components/points_table_row.dart';
-import 'package:dominote/utilities/internationalization_constants.dart';
-import 'package:dominote/screens/game_winner_screen.dart';
-import 'package:dominote/screens/settings_screen.dart';
-import 'package:dominote/models/gameDataInformation.dart';
+import 'package:apuntalo/components/points_table_row.dart';
+import 'package:apuntalo/utilities/internationalization_constants.dart';
+import 'package:apuntalo/screens/game_winner_screen.dart';
+import 'package:apuntalo/screens/settings_screen.dart';
+import 'package:apuntalo/models/gameDataInformation.dart';
 
 import '../utilities/styles.dart';
 
